@@ -3,7 +3,7 @@
 This project follows [Semantic Versioning](https://semver.org/). While it's
 below 1.0.0, minor versions may still change the API.
 
-## 0.2.0 - Unreleased
+## 0.2.0 - 2026-09-23
 
 - `todayBs(now?: Date)`: today's date in Nepal (Nepal Standard Time,
   UTC+05:45) as a BS date, whatever the runtime's timezone. Unlike
