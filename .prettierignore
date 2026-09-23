@@ -1,0 +1,8 @@
+dist
+coverage
+node_modules
+bun.lock
+src/data.ts
+data/calendar.json
+tests/fixtures
+tools/go-reference/go.sum

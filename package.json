@@ -1,0 +1,77 @@
+{
+  "name": "bikram-sambat-ts",
+  "version": "0.1.0",
+  "description": "Lightweight, dependency-free TypeScript library for converting dates between Gregorian (AD) and Bikram Sambat (BS), the calendar used in Nepal.",
+  "keywords": [
+    "bikram-sambat",
+    "bs",
+    "nepali-date",
+    "nepali-calendar",
+    "nepal",
+    "calendar",
+    "date",
+    "date-conversion",
+    "ad-to-bs",
+    "bs-to-ad"
+  ],
+  "license": "MIT",
+  "author": "Suprim Khatri",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SuprimKhatri77/bikram-sambat-ts.git"
+  },
+  "homepage": "https://github.com/SuprimKhatri77/bikram-sambat-ts#readme",
+  "bugs": {
+    "url": "https://github.com/SuprimKhatri77/bikram-sambat-ts/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "bun test",
+    "test:timezones": "bun scripts/test-timezones.ts",
+    "test:coverage": "bun test --coverage",
+    "test:smoke": "node scripts/smoke.mjs && node scripts/smoke.cjs",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.lib.json",
+    "lint": "eslint . && markdownlint-cli2",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "generate": "bun scripts/generate-data.ts",
+    "check:package": "publint --strict && attw --pack .",
+    "prepublishOnly": "bun run typecheck && bun run lint && bun test && bun run build && bun run test:smoke"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@eslint/js": "^10.0.1",
+    "@types/bun": "^1.4.2",
+    "eslint": "^10.11.0",
+    "markdownlint-cli2": "^0.23.3",
+    "prettier": "^3.9.9",
+    "publint": "^0.3.24",
+    "tsup": "^8.5.1",
+    "typescript": "~5.9",
+    "typescript-eslint": "^8.70.1"
+  }
+}

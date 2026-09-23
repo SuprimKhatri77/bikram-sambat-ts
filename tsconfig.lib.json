@@ -1,0 +1,11 @@
+{
+  // The library alone, with no runtime type definitions at all, so any use of
+  // Node or Bun APIs (process, Buffer, node:*) in src/ is a type error. Also
+  // what tsup uses to emit the published .d.ts files.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2020"],
+    "types": []
+  },
+  "include": ["src"]
+}

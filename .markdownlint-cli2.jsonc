@@ -1,0 +1,9 @@
+{
+  // Same rules as go-bs: prose, tables and link lines routinely exceed a fixed
+  // column count, and wrapping them buys nothing for a project this size.
+  "config": {
+    "MD013": false,
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules", "dist", "LICENSE"],
+}

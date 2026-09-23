@@ -1,0 +1,53 @@
+name: publish
+
+# Publishes to npm when a GitHub release is published, using npm trusted
+# publishing (OIDC): no long-lived npm token is stored anywhere.
+#
+# One-time setup, before this can work (see CONTRIBUTING.md / README):
+#   1. Publish the first version by hand (`npm publish`) so the package exists.
+#   2. On npmjs.com, package settings -> Trusted publishing -> GitHub Actions:
+#      this repository, workflow file "publish.yml".
+# Until then, this workflow fails at the publish step and nothing is released.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.9
+
+      # Node 24 ships npm 11, which supports trusted publishing.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      - name: Check the release tag matches package.json
+        run: |
+          version="$(node -p 'require("./package.json").version')"
+          if [ "${GITHUB_REF_NAME}" != "v${version}" ]; then
+            echo "Release tag ${GITHUB_REF_NAME} does not match package.json version v${version}" >&2
+            exit 1
+          fi
+
+      - run: bun install --frozen-lockfile
+      - run: bun run typecheck
+      - run: bun run lint
+      - run: bun run test:timezones
+      - run: bun run build
+      - run: bun run test:smoke
+      - run: bun run check:package
+
+      # prepublishOnly re-runs typecheck/lint/test/build/smoke.
+      - run: npm publish --access public

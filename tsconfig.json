@@ -1,0 +1,10 @@
+{
+  // The project-wide config, used by editors and `bun run typecheck`: the
+  // library, tests and tooling, with Bun's (and Node's) type definitions.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "types": ["bun"]
+  },
+  "include": ["src", "tests", "scripts", "tsup.config.ts", "eslint.config.js"]
+}
