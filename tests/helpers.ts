@@ -45,6 +45,7 @@ export function expectGoError(fn: () => unknown, kind: string): void {
     day: "InvalidBSDateError",
     format: "BSDateFormatError",
     outOfRange: "DateOutOfRangeError",
+    dateOrder: "InvalidDateOrderError",
   }[kind];
   if (errorClass === undefined) {
     throw new Error(`unknown go-bs error kind ${kind}`);

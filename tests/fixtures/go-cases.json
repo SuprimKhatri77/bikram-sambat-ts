@@ -6943,5 +6943,2152 @@
       "nepali": "",
       "error": "month"
     }
+  ],
+  "yearBounds": [
+    {
+      "year": 1978,
+      "start": "",
+      "end": "",
+      "error": "year"
+    },
+    {
+      "year": 1979,
+      "start": "1979-01-01",
+      "end": "1979-12-30",
+      "error": ""
+    },
+    {
+      "year": 2000,
+      "start": "2000-01-01",
+      "end": "2000-12-31",
+      "error": ""
+    },
+    {
+      "year": 2083,
+      "start": "2083-01-01",
+      "end": "2083-12-30",
+      "error": ""
+    },
+    {
+      "year": 2087,
+      "start": "2087-01-01",
+      "end": "2087-12-30",
+      "error": ""
+    },
+    {
+      "year": 2096,
+      "start": "2096-01-01",
+      "end": "2096-12-30",
+      "error": ""
+    },
+    {
+      "year": 2100,
+      "start": "2100-01-01",
+      "end": "2100-12-31",
+      "error": ""
+    },
+    {
+      "year": 2101,
+      "start": "",
+      "end": "",
+      "error": "year"
+    }
+  ],
+  "monthErrors": [
+    {
+      "year": 1978,
+      "month": 12,
+      "startOfMonth": "year",
+      "endOfMonth": "year",
+      "firstWeekday": "year",
+      "weeksInMonth": "year",
+      "monthCalendar": "year"
+    },
+    {
+      "year": 2101,
+      "month": 1,
+      "startOfMonth": "year",
+      "endOfMonth": "year",
+      "firstWeekday": "year",
+      "weeksInMonth": "year",
+      "monthCalendar": "year"
+    },
+    {
+      "year": 2083,
+      "month": 0,
+      "startOfMonth": "month",
+      "endOfMonth": "month",
+      "firstWeekday": "month",
+      "weeksInMonth": "month",
+      "monthCalendar": "month"
+    },
+    {
+      "year": 2083,
+      "month": 13,
+      "startOfMonth": "month",
+      "endOfMonth": "month",
+      "firstWeekday": "month",
+      "weeksInMonth": "month",
+      "monthCalendar": "month"
+    },
+    {
+      "year": 2083,
+      "month": -1,
+      "startOfMonth": "month",
+      "endOfMonth": "month",
+      "firstWeekday": "month",
+      "weeksInMonth": "month",
+      "monthCalendar": "month"
+    }
+  ],
+  "age": [
+    {
+      "birth": "1979-01-01",
+      "today": "1979-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "1979-01-01",
+      "today": "1990-05-15",
+      "years": 11,
+      "months": 4,
+      "days": 14,
+      "error": ""
+    },
+    {
+      "birth": "1979-01-01",
+      "today": "2000-01-30",
+      "years": 21,
+      "months": 0,
+      "days": 29,
+      "error": ""
+    },
+    {
+      "birth": "1979-01-01",
+      "today": "2040-03-32",
+      "years": 61,
+      "months": 2,
+      "days": 31,
+      "error": ""
+    },
+    {
+      "birth": "1979-01-01",
+      "today": "2060-06-15",
+      "years": 81,
+      "months": 5,
+      "days": 14,
+      "error": ""
+    },
+    {
+      "birth": "1979-01-01",
+      "today": "2082-12-30",
+      "years": 103,
+      "months": 11,
+      "days": 29,
+      "error": ""
+    },
+    {
+      "birth": "1979-01-01",
+      "today": "2083-01-01",
+      "years": 104,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "1979-01-01",
+      "today": "2083-02-31",
+      "years": 104,
+      "months": 1,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "1979-01-01",
+      "today": "2083-03-32",
+      "years": 104,
+      "months": 2,
+      "days": 31,
+      "error": ""
+    },
+    {
+      "birth": "1979-01-01",
+      "today": "2083-04-01",
+      "years": 104,
+      "months": 3,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "1979-01-01",
+      "today": "2083-06-06",
+      "years": 104,
+      "months": 5,
+      "days": 5,
+      "error": ""
+    },
+    {
+      "birth": "1979-01-01",
+      "today": "2083-06-07",
+      "years": 104,
+      "months": 5,
+      "days": 6,
+      "error": ""
+    },
+    {
+      "birth": "1979-01-01",
+      "today": "2083-06-31",
+      "years": 104,
+      "months": 5,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "1979-01-01",
+      "today": "2084-01-01",
+      "years": 105,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "1979-01-01",
+      "today": "2084-03-31",
+      "years": 105,
+      "months": 2,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "1979-01-01",
+      "today": "2100-12-31",
+      "years": 121,
+      "months": 11,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "1990-05-15",
+      "today": "1979-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "1990-05-15",
+      "today": "1990-05-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "1990-05-15",
+      "today": "2000-01-30",
+      "years": 9,
+      "months": 8,
+      "days": 15,
+      "error": ""
+    },
+    {
+      "birth": "1990-05-15",
+      "today": "2040-03-32",
+      "years": 49,
+      "months": 10,
+      "days": 17,
+      "error": ""
+    },
+    {
+      "birth": "1990-05-15",
+      "today": "2060-06-15",
+      "years": 70,
+      "months": 1,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "1990-05-15",
+      "today": "2082-12-30",
+      "years": 92,
+      "months": 7,
+      "days": 15,
+      "error": ""
+    },
+    {
+      "birth": "1990-05-15",
+      "today": "2083-01-01",
+      "years": 92,
+      "months": 7,
+      "days": 16,
+      "error": ""
+    },
+    {
+      "birth": "1990-05-15",
+      "today": "2083-02-31",
+      "years": 92,
+      "months": 9,
+      "days": 16,
+      "error": ""
+    },
+    {
+      "birth": "1990-05-15",
+      "today": "2083-03-32",
+      "years": 92,
+      "months": 10,
+      "days": 17,
+      "error": ""
+    },
+    {
+      "birth": "1990-05-15",
+      "today": "2083-04-01",
+      "years": 92,
+      "months": 10,
+      "days": 18,
+      "error": ""
+    },
+    {
+      "birth": "1990-05-15",
+      "today": "2083-06-06",
+      "years": 93,
+      "months": 0,
+      "days": 22,
+      "error": ""
+    },
+    {
+      "birth": "1990-05-15",
+      "today": "2083-06-07",
+      "years": 93,
+      "months": 0,
+      "days": 23,
+      "error": ""
+    },
+    {
+      "birth": "1990-05-15",
+      "today": "2083-06-31",
+      "years": 93,
+      "months": 1,
+      "days": 16,
+      "error": ""
+    },
+    {
+      "birth": "1990-05-15",
+      "today": "2084-01-01",
+      "years": 93,
+      "months": 7,
+      "days": 16,
+      "error": ""
+    },
+    {
+      "birth": "1990-05-15",
+      "today": "2084-03-31",
+      "years": 93,
+      "months": 10,
+      "days": 16,
+      "error": ""
+    },
+    {
+      "birth": "1990-05-15",
+      "today": "2100-12-31",
+      "years": 110,
+      "months": 7,
+      "days": 16,
+      "error": ""
+    },
+    {
+      "birth": "2000-01-30",
+      "today": "1979-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2000-01-30",
+      "today": "1990-05-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2000-01-30",
+      "today": "2000-01-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2000-01-30",
+      "today": "2040-03-32",
+      "years": 40,
+      "months": 2,
+      "days": 2,
+      "error": ""
+    },
+    {
+      "birth": "2000-01-30",
+      "today": "2060-06-15",
+      "years": 60,
+      "months": 4,
+      "days": 16,
+      "error": ""
+    },
+    {
+      "birth": "2000-01-30",
+      "today": "2082-12-30",
+      "years": 82,
+      "months": 11,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2000-01-30",
+      "today": "2083-01-01",
+      "years": 82,
+      "months": 11,
+      "days": 1,
+      "error": ""
+    },
+    {
+      "birth": "2000-01-30",
+      "today": "2083-02-31",
+      "years": 83,
+      "months": 1,
+      "days": 1,
+      "error": ""
+    },
+    {
+      "birth": "2000-01-30",
+      "today": "2083-03-32",
+      "years": 83,
+      "months": 2,
+      "days": 2,
+      "error": ""
+    },
+    {
+      "birth": "2000-01-30",
+      "today": "2083-04-01",
+      "years": 83,
+      "months": 2,
+      "days": 3,
+      "error": ""
+    },
+    {
+      "birth": "2000-01-30",
+      "today": "2083-06-06",
+      "years": 83,
+      "months": 4,
+      "days": 7,
+      "error": ""
+    },
+    {
+      "birth": "2000-01-30",
+      "today": "2083-06-07",
+      "years": 83,
+      "months": 4,
+      "days": 8,
+      "error": ""
+    },
+    {
+      "birth": "2000-01-30",
+      "today": "2083-06-31",
+      "years": 83,
+      "months": 5,
+      "days": 1,
+      "error": ""
+    },
+    {
+      "birth": "2000-01-30",
+      "today": "2084-01-01",
+      "years": 83,
+      "months": 11,
+      "days": 1,
+      "error": ""
+    },
+    {
+      "birth": "2000-01-30",
+      "today": "2084-03-31",
+      "years": 84,
+      "months": 2,
+      "days": 1,
+      "error": ""
+    },
+    {
+      "birth": "2000-01-30",
+      "today": "2100-12-31",
+      "years": 100,
+      "months": 11,
+      "days": 1,
+      "error": ""
+    },
+    {
+      "birth": "2040-03-32",
+      "today": "1979-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2040-03-32",
+      "today": "1990-05-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2040-03-32",
+      "today": "2000-01-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2040-03-32",
+      "today": "2040-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2040-03-32",
+      "today": "2060-06-15",
+      "years": 20,
+      "months": 2,
+      "days": 14,
+      "error": ""
+    },
+    {
+      "birth": "2040-03-32",
+      "today": "2082-12-30",
+      "years": 42,
+      "months": 8,
+      "days": 28,
+      "error": ""
+    },
+    {
+      "birth": "2040-03-32",
+      "today": "2083-01-01",
+      "years": 42,
+      "months": 9,
+      "days": -1,
+      "error": ""
+    },
+    {
+      "birth": "2040-03-32",
+      "today": "2083-02-31",
+      "years": 42,
+      "months": 10,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "2040-03-32",
+      "today": "2083-03-32",
+      "years": 43,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2040-03-32",
+      "today": "2083-04-01",
+      "years": 43,
+      "months": 0,
+      "days": 1,
+      "error": ""
+    },
+    {
+      "birth": "2040-03-32",
+      "today": "2083-06-06",
+      "years": 43,
+      "months": 2,
+      "days": 5,
+      "error": ""
+    },
+    {
+      "birth": "2040-03-32",
+      "today": "2083-06-07",
+      "years": 43,
+      "months": 2,
+      "days": 6,
+      "error": ""
+    },
+    {
+      "birth": "2040-03-32",
+      "today": "2083-06-31",
+      "years": 43,
+      "months": 2,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "2040-03-32",
+      "today": "2084-01-01",
+      "years": 43,
+      "months": 9,
+      "days": -1,
+      "error": ""
+    },
+    {
+      "birth": "2040-03-32",
+      "today": "2084-03-31",
+      "years": 43,
+      "months": 11,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "2040-03-32",
+      "today": "2100-12-31",
+      "years": 60,
+      "months": 8,
+      "days": 29,
+      "error": ""
+    },
+    {
+      "birth": "2060-06-15",
+      "today": "1979-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2060-06-15",
+      "today": "1990-05-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2060-06-15",
+      "today": "2000-01-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2060-06-15",
+      "today": "2040-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2060-06-15",
+      "today": "2060-06-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2060-06-15",
+      "today": "2082-12-30",
+      "years": 22,
+      "months": 6,
+      "days": 15,
+      "error": ""
+    },
+    {
+      "birth": "2060-06-15",
+      "today": "2083-01-01",
+      "years": 22,
+      "months": 6,
+      "days": 16,
+      "error": ""
+    },
+    {
+      "birth": "2060-06-15",
+      "today": "2083-02-31",
+      "years": 22,
+      "months": 8,
+      "days": 16,
+      "error": ""
+    },
+    {
+      "birth": "2060-06-15",
+      "today": "2083-03-32",
+      "years": 22,
+      "months": 9,
+      "days": 17,
+      "error": ""
+    },
+    {
+      "birth": "2060-06-15",
+      "today": "2083-04-01",
+      "years": 22,
+      "months": 9,
+      "days": 18,
+      "error": ""
+    },
+    {
+      "birth": "2060-06-15",
+      "today": "2083-06-06",
+      "years": 22,
+      "months": 11,
+      "days": 22,
+      "error": ""
+    },
+    {
+      "birth": "2060-06-15",
+      "today": "2083-06-07",
+      "years": 22,
+      "months": 11,
+      "days": 23,
+      "error": ""
+    },
+    {
+      "birth": "2060-06-15",
+      "today": "2083-06-31",
+      "years": 23,
+      "months": 0,
+      "days": 16,
+      "error": ""
+    },
+    {
+      "birth": "2060-06-15",
+      "today": "2084-01-01",
+      "years": 23,
+      "months": 6,
+      "days": 16,
+      "error": ""
+    },
+    {
+      "birth": "2060-06-15",
+      "today": "2084-03-31",
+      "years": 23,
+      "months": 9,
+      "days": 16,
+      "error": ""
+    },
+    {
+      "birth": "2060-06-15",
+      "today": "2100-12-31",
+      "years": 40,
+      "months": 6,
+      "days": 16,
+      "error": ""
+    },
+    {
+      "birth": "2082-12-30",
+      "today": "1979-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2082-12-30",
+      "today": "1990-05-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2082-12-30",
+      "today": "2000-01-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2082-12-30",
+      "today": "2040-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2082-12-30",
+      "today": "2060-06-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2082-12-30",
+      "today": "2082-12-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2082-12-30",
+      "today": "2083-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 1,
+      "error": ""
+    },
+    {
+      "birth": "2082-12-30",
+      "today": "2083-02-31",
+      "years": 0,
+      "months": 2,
+      "days": 1,
+      "error": ""
+    },
+    {
+      "birth": "2082-12-30",
+      "today": "2083-03-32",
+      "years": 0,
+      "months": 3,
+      "days": 2,
+      "error": ""
+    },
+    {
+      "birth": "2082-12-30",
+      "today": "2083-04-01",
+      "years": 0,
+      "months": 3,
+      "days": 3,
+      "error": ""
+    },
+    {
+      "birth": "2082-12-30",
+      "today": "2083-06-06",
+      "years": 0,
+      "months": 5,
+      "days": 7,
+      "error": ""
+    },
+    {
+      "birth": "2082-12-30",
+      "today": "2083-06-07",
+      "years": 0,
+      "months": 5,
+      "days": 8,
+      "error": ""
+    },
+    {
+      "birth": "2082-12-30",
+      "today": "2083-06-31",
+      "years": 0,
+      "months": 6,
+      "days": 1,
+      "error": ""
+    },
+    {
+      "birth": "2082-12-30",
+      "today": "2084-01-01",
+      "years": 1,
+      "months": 0,
+      "days": 1,
+      "error": ""
+    },
+    {
+      "birth": "2082-12-30",
+      "today": "2084-03-31",
+      "years": 1,
+      "months": 3,
+      "days": 1,
+      "error": ""
+    },
+    {
+      "birth": "2082-12-30",
+      "today": "2100-12-31",
+      "years": 18,
+      "months": 0,
+      "days": 1,
+      "error": ""
+    },
+    {
+      "birth": "2083-01-01",
+      "today": "1979-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-01-01",
+      "today": "1990-05-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-01-01",
+      "today": "2000-01-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-01-01",
+      "today": "2040-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-01-01",
+      "today": "2060-06-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-01-01",
+      "today": "2082-12-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-01-01",
+      "today": "2083-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2083-01-01",
+      "today": "2083-02-31",
+      "years": 0,
+      "months": 1,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "2083-01-01",
+      "today": "2083-03-32",
+      "years": 0,
+      "months": 2,
+      "days": 31,
+      "error": ""
+    },
+    {
+      "birth": "2083-01-01",
+      "today": "2083-04-01",
+      "years": 0,
+      "months": 3,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2083-01-01",
+      "today": "2083-06-06",
+      "years": 0,
+      "months": 5,
+      "days": 5,
+      "error": ""
+    },
+    {
+      "birth": "2083-01-01",
+      "today": "2083-06-07",
+      "years": 0,
+      "months": 5,
+      "days": 6,
+      "error": ""
+    },
+    {
+      "birth": "2083-01-01",
+      "today": "2083-06-31",
+      "years": 0,
+      "months": 5,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "2083-01-01",
+      "today": "2084-01-01",
+      "years": 1,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2083-01-01",
+      "today": "2084-03-31",
+      "years": 1,
+      "months": 2,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "2083-01-01",
+      "today": "2100-12-31",
+      "years": 17,
+      "months": 11,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "2083-02-31",
+      "today": "1979-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-02-31",
+      "today": "1990-05-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-02-31",
+      "today": "2000-01-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-02-31",
+      "today": "2040-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-02-31",
+      "today": "2060-06-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-02-31",
+      "today": "2082-12-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-02-31",
+      "today": "2083-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-02-31",
+      "today": "2083-02-31",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2083-02-31",
+      "today": "2083-03-32",
+      "years": 0,
+      "months": 1,
+      "days": 1,
+      "error": ""
+    },
+    {
+      "birth": "2083-02-31",
+      "today": "2083-04-01",
+      "years": 0,
+      "months": 1,
+      "days": 2,
+      "error": ""
+    },
+    {
+      "birth": "2083-02-31",
+      "today": "2083-06-06",
+      "years": 0,
+      "months": 3,
+      "days": 6,
+      "error": ""
+    },
+    {
+      "birth": "2083-02-31",
+      "today": "2083-06-07",
+      "years": 0,
+      "months": 3,
+      "days": 7,
+      "error": ""
+    },
+    {
+      "birth": "2083-02-31",
+      "today": "2083-06-31",
+      "years": 0,
+      "months": 4,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2083-02-31",
+      "today": "2084-01-01",
+      "years": 0,
+      "months": 10,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2083-02-31",
+      "today": "2084-03-31",
+      "years": 1,
+      "months": 1,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2083-02-31",
+      "today": "2100-12-31",
+      "years": 17,
+      "months": 10,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2083-03-32",
+      "today": "1979-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-03-32",
+      "today": "1990-05-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-03-32",
+      "today": "2000-01-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-03-32",
+      "today": "2040-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-03-32",
+      "today": "2060-06-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-03-32",
+      "today": "2082-12-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-03-32",
+      "today": "2083-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-03-32",
+      "today": "2083-02-31",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-03-32",
+      "today": "2083-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2083-03-32",
+      "today": "2083-04-01",
+      "years": 0,
+      "months": 0,
+      "days": 1,
+      "error": ""
+    },
+    {
+      "birth": "2083-03-32",
+      "today": "2083-06-06",
+      "years": 0,
+      "months": 2,
+      "days": 5,
+      "error": ""
+    },
+    {
+      "birth": "2083-03-32",
+      "today": "2083-06-07",
+      "years": 0,
+      "months": 2,
+      "days": 6,
+      "error": ""
+    },
+    {
+      "birth": "2083-03-32",
+      "today": "2083-06-31",
+      "years": 0,
+      "months": 2,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "2083-03-32",
+      "today": "2084-01-01",
+      "years": 0,
+      "months": 9,
+      "days": -1,
+      "error": ""
+    },
+    {
+      "birth": "2083-03-32",
+      "today": "2084-03-31",
+      "years": 0,
+      "months": 11,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "2083-03-32",
+      "today": "2100-12-31",
+      "years": 17,
+      "months": 8,
+      "days": 29,
+      "error": ""
+    },
+    {
+      "birth": "2083-04-01",
+      "today": "1979-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-04-01",
+      "today": "1990-05-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-04-01",
+      "today": "2000-01-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-04-01",
+      "today": "2040-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-04-01",
+      "today": "2060-06-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-04-01",
+      "today": "2082-12-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-04-01",
+      "today": "2083-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-04-01",
+      "today": "2083-02-31",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-04-01",
+      "today": "2083-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-04-01",
+      "today": "2083-04-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2083-04-01",
+      "today": "2083-06-06",
+      "years": 0,
+      "months": 2,
+      "days": 5,
+      "error": ""
+    },
+    {
+      "birth": "2083-04-01",
+      "today": "2083-06-07",
+      "years": 0,
+      "months": 2,
+      "days": 6,
+      "error": ""
+    },
+    {
+      "birth": "2083-04-01",
+      "today": "2083-06-31",
+      "years": 0,
+      "months": 2,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "2083-04-01",
+      "today": "2084-01-01",
+      "years": 0,
+      "months": 9,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2083-04-01",
+      "today": "2084-03-31",
+      "years": 0,
+      "months": 11,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "2083-04-01",
+      "today": "2100-12-31",
+      "years": 17,
+      "months": 8,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "2083-06-06",
+      "today": "1979-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-06",
+      "today": "1990-05-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-06",
+      "today": "2000-01-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-06",
+      "today": "2040-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-06",
+      "today": "2060-06-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-06",
+      "today": "2082-12-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-06",
+      "today": "2083-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-06",
+      "today": "2083-02-31",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-06",
+      "today": "2083-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-06",
+      "today": "2083-04-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-06",
+      "today": "2083-06-06",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2083-06-06",
+      "today": "2083-06-07",
+      "years": 0,
+      "months": 0,
+      "days": 1,
+      "error": ""
+    },
+    {
+      "birth": "2083-06-06",
+      "today": "2083-06-31",
+      "years": 0,
+      "months": 0,
+      "days": 25,
+      "error": ""
+    },
+    {
+      "birth": "2083-06-06",
+      "today": "2084-01-01",
+      "years": 0,
+      "months": 6,
+      "days": 25,
+      "error": ""
+    },
+    {
+      "birth": "2083-06-06",
+      "today": "2084-03-31",
+      "years": 0,
+      "months": 9,
+      "days": 25,
+      "error": ""
+    },
+    {
+      "birth": "2083-06-06",
+      "today": "2100-12-31",
+      "years": 17,
+      "months": 6,
+      "days": 25,
+      "error": ""
+    },
+    {
+      "birth": "2083-06-07",
+      "today": "1979-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-07",
+      "today": "1990-05-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-07",
+      "today": "2000-01-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-07",
+      "today": "2040-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-07",
+      "today": "2060-06-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-07",
+      "today": "2082-12-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-07",
+      "today": "2083-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-07",
+      "today": "2083-02-31",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-07",
+      "today": "2083-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-07",
+      "today": "2083-04-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-07",
+      "today": "2083-06-06",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-07",
+      "today": "2083-06-07",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2083-06-07",
+      "today": "2083-06-31",
+      "years": 0,
+      "months": 0,
+      "days": 24,
+      "error": ""
+    },
+    {
+      "birth": "2083-06-07",
+      "today": "2084-01-01",
+      "years": 0,
+      "months": 6,
+      "days": 24,
+      "error": ""
+    },
+    {
+      "birth": "2083-06-07",
+      "today": "2084-03-31",
+      "years": 0,
+      "months": 9,
+      "days": 24,
+      "error": ""
+    },
+    {
+      "birth": "2083-06-07",
+      "today": "2100-12-31",
+      "years": 17,
+      "months": 6,
+      "days": 24,
+      "error": ""
+    },
+    {
+      "birth": "2083-06-31",
+      "today": "1979-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-31",
+      "today": "1990-05-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-31",
+      "today": "2000-01-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-31",
+      "today": "2040-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-31",
+      "today": "2060-06-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-31",
+      "today": "2082-12-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-31",
+      "today": "2083-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-31",
+      "today": "2083-02-31",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-31",
+      "today": "2083-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-31",
+      "today": "2083-04-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-31",
+      "today": "2083-06-06",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-31",
+      "today": "2083-06-07",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2083-06-31",
+      "today": "2083-06-31",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2083-06-31",
+      "today": "2084-01-01",
+      "years": 0,
+      "months": 6,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2083-06-31",
+      "today": "2084-03-31",
+      "years": 0,
+      "months": 9,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2083-06-31",
+      "today": "2100-12-31",
+      "years": 17,
+      "months": 6,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2084-01-01",
+      "today": "1979-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-01-01",
+      "today": "1990-05-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-01-01",
+      "today": "2000-01-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-01-01",
+      "today": "2040-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-01-01",
+      "today": "2060-06-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-01-01",
+      "today": "2082-12-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-01-01",
+      "today": "2083-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-01-01",
+      "today": "2083-02-31",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-01-01",
+      "today": "2083-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-01-01",
+      "today": "2083-04-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-01-01",
+      "today": "2083-06-06",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-01-01",
+      "today": "2083-06-07",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-01-01",
+      "today": "2083-06-31",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-01-01",
+      "today": "2084-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2084-01-01",
+      "today": "2084-03-31",
+      "years": 0,
+      "months": 2,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "2084-01-01",
+      "today": "2100-12-31",
+      "years": 16,
+      "months": 11,
+      "days": 30,
+      "error": ""
+    },
+    {
+      "birth": "2084-03-31",
+      "today": "1979-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-03-31",
+      "today": "1990-05-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-03-31",
+      "today": "2000-01-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-03-31",
+      "today": "2040-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-03-31",
+      "today": "2060-06-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-03-31",
+      "today": "2082-12-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-03-31",
+      "today": "2083-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-03-31",
+      "today": "2083-02-31",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-03-31",
+      "today": "2083-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-03-31",
+      "today": "2083-04-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-03-31",
+      "today": "2083-06-06",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-03-31",
+      "today": "2083-06-07",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-03-31",
+      "today": "2083-06-31",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-03-31",
+      "today": "2084-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2084-03-31",
+      "today": "2084-03-31",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2084-03-31",
+      "today": "2100-12-31",
+      "years": 16,
+      "months": 9,
+      "days": 0,
+      "error": ""
+    },
+    {
+      "birth": "2100-12-31",
+      "today": "1979-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2100-12-31",
+      "today": "1990-05-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2100-12-31",
+      "today": "2000-01-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2100-12-31",
+      "today": "2040-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2100-12-31",
+      "today": "2060-06-15",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2100-12-31",
+      "today": "2082-12-30",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2100-12-31",
+      "today": "2083-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2100-12-31",
+      "today": "2083-02-31",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2100-12-31",
+      "today": "2083-03-32",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2100-12-31",
+      "today": "2083-04-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2100-12-31",
+      "today": "2083-06-06",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2100-12-31",
+      "today": "2083-06-07",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2100-12-31",
+      "today": "2083-06-31",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2100-12-31",
+      "today": "2084-01-01",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2100-12-31",
+      "today": "2084-03-31",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": "dateOrder"
+    },
+    {
+      "birth": "2100-12-31",
+      "today": "2100-12-31",
+      "years": 0,
+      "months": 0,
+      "days": 0,
+      "error": ""
+    }
   ]
 }

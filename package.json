@@ -1,6 +1,6 @@
 {
   "name": "bikram-sambat-ts",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Lightweight, dependency-free TypeScript library for converting dates between Gregorian (AD) and Bikram Sambat (BS), the calendar used in Nepal.",
   "keywords": [
     "bikram-sambat",
