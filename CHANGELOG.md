@@ -3,6 +3,13 @@
 This project follows [Semantic Versioning](https://semver.org/). While it's
 below 1.0.0, minor versions may still change the API.
 
+## 0.2.0 - Unreleased
+
+- `todayBs(now?: Date)`: today's date in Nepal (Nepal Standard Time,
+  UTC+05:45) as a BS date, whatever the runtime's timezone. Unlike
+  `adToBs(new Date())`, it gives the right day on servers running in UTC
+  during the 5 h 45 min after midnight in Nepal. Matches go-bs's `TodayBS`.
+
 ## 0.1.0 - 2026-09-23
 
 Initial release, based on go-bs v0.6.1.
@@ -27,9 +34,8 @@ Initial release, based on go-bs v0.6.1.
 
 ## Possible next steps
 
-These exist in go-bs but aren't in 0.1.0 yet:
+These exist in go-bs but aren't in this package yet:
 
-- `todayBs()` fixed to Nepal time (UTC+05:45), like go-bs's `TodayBS`
 - Next/previous month (clamped), start/end of month and year, day of year
 - `age`
 - A month calendar grid (`MonthCalendar`)
