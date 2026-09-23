@@ -11,6 +11,8 @@ import {
   getBsDayOfWeek,
   getBsMonthName,
   getBsMonthNameNepali,
+  getBsWeekdayName,
+  getBsWeekdayNameNepali,
   isAfterBs,
   isBeforeBs,
   isEqualBs,
@@ -18,6 +20,7 @@ import {
   subtractBsDays,
   toNepaliDigits,
   type BSDate,
+  type Weekday,
 } from "../src";
 import { bs, forEachBsDate } from "./helpers";
 
@@ -159,6 +162,90 @@ describe("formatBsDate", () => {
   test("rejects invalid dates", () => {
     expect(() => formatBsDate(bs("2083-13-01"))).toThrow(InvalidBSDateError);
     expect(() => formatBsDate(bs("1978-01-01"), "YYYY")).toThrow(InvalidBSDateError);
+  });
+});
+
+describe("formatBsDate in Nepali", () => {
+  const d = bs("2083-06-07"); // Wednesday
+
+  test("renders digits and names in Nepali", () => {
+    expect(formatBsDate(d, { nepali: true })).toBe("२०८३-०६-०७");
+    expect(formatBsDate(d, undefined, { nepali: true })).toBe("२०८३-०६-०७");
+    expect(formatBsDate(d, "dddd, MMMM D, YYYY", { nepali: true })).toBe("बुधवार, असोज ७, २०८३");
+    expect(formatBsDate(d, "ddd DD/MM/YY", { nepali: true })).toBe("बुध ०७/०६/८३");
+    expect(formatBsDate(bs("2083-01-01"), "D MMMM YYYY, dddd", { nepali: true })).toBe(
+      "१ वैशाख २०८३, मंगलवार",
+    );
+  });
+
+  test("copies literal characters, including ASCII digits, unchanged", () => {
+    expect(formatBsDate(d, "मिति: YYYY", { nepali: true })).toBe("मिति: २०८३");
+    expect(formatBsDate(d, "YYYY 1", { nepali: true })).toBe("२०८३ 1");
+  });
+
+  test("nepali: false and {} are English", () => {
+    expect(formatBsDate(d, { nepali: false })).toBe("2083-06-07");
+    expect(formatBsDate(d, "dddd", {})).toBe("Wednesday");
+  });
+
+  test("equals the English output with Nepali digits and names, for every supported date", () => {
+    forEachBsDate((date) => {
+      const nepali = formatBsDate(date, "YYYY-MM-DD YY M D dddd MMMM", { nepali: true });
+      const weekday = getBsDayOfWeek(date);
+      const expected = `${toNepaliDigits(formatBsDate(date, "YYYY-MM-DD YY M D"))} ${getBsWeekdayNameNepali(weekday)} ${getBsMonthNameNepali(date.month)}`;
+      if (nepali !== expected) {
+        throw new Error(`${JSON.stringify(date)}: ${nepali} !== ${expected}`);
+      }
+    });
+  });
+
+  test("round-trips through fromNepaliDigits and parseBsDate", () => {
+    expect(parseBsDate(fromNepaliDigits(formatBsDate(d, { nepali: true })))).toEqual(d);
+  });
+
+  test("rejects invalid dates", () => {
+    expect(() => formatBsDate(bs("2083-13-01"), { nepali: true })).toThrow(InvalidBSDateError);
+  });
+});
+
+describe("weekday names", () => {
+  test("English and Nepali, numbered like Date#getDay", () => {
+    expect([0, 1, 2, 3, 4, 5, 6].map(getBsWeekdayName)).toEqual([
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ]);
+    expect([0, 1, 2, 3, 4, 5, 6].map(getBsWeekdayNameNepali)).toEqual([
+      "आइतवार",
+      "सोमवार",
+      "मंगलवार",
+      "बुधवार",
+      "बिहिवार",
+      "शुक्रवार",
+      "शनिवार",
+    ]);
+    expect(getBsWeekdayNameNepali(getBsDayOfWeek(bs("2083-06-07")))).toBe("बुधवार");
+  });
+
+  test("short Nepali names are the full names without वार", () => {
+    for (let weekday = 0; weekday <= 6; weekday++) {
+      const date = addBsDays(bs("2083-06-04"), weekday); // 2083-06-04 is a Sunday
+      expect(getBsDayOfWeek(date)).toBe(weekday as Weekday);
+      expect(formatBsDate(date, "ddd", { nepali: true }) + "वार").toBe(
+        getBsWeekdayNameNepali(weekday),
+      );
+    }
+  });
+
+  test("reject invalid weekdays", () => {
+    for (const weekday of [-1, 7, 1.5, Number.NaN]) {
+      expect(() => getBsWeekdayName(weekday)).toThrow(RangeError);
+      expect(() => getBsWeekdayNameNepali(weekday)).toThrow("bs: invalid weekday");
+    }
   });
 });
 

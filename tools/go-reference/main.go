@@ -36,7 +36,7 @@ import (
 // goBSVersion must match the go-bs version required in go.mod. It's recorded
 // in every output file so a fixture can always be traced to the exact Go
 // release it came from.
-const goBSVersion = "v0.6.1"
+const goBSVersion = "v0.7.0"
 
 const source = "github.com/suprimkhatri77/go-bs@" + goBSVersion
 
@@ -69,6 +69,8 @@ func errKind(err error) string {
 		return "outOfRange"
 	case errors.Is(err, bs.ErrInvalidDateOrder):
 		return "dateOrder"
+	case errors.Is(err, bs.ErrInvalidWeekday):
+		return "weekday"
 	default:
 		log.Fatalf("unexpected error kind: %v", err)
 		return ""
@@ -166,6 +168,13 @@ type formatCase struct {
 	Output string `json:"output"`
 }
 
+type weekdayCase struct {
+	Weekday int    `json:"weekday"`
+	Name    string `json:"name"`
+	Nepali  string `json:"nepali"`
+	Error   string `json:"error"`
+}
+
 type addDaysCase struct {
 	BS     string `json:"bs"`
 	Days   int    `json:"days"`
@@ -193,21 +202,23 @@ type monthNameCase struct {
 }
 
 type casesFile struct {
-	Comment     string           `json:"$comment"`
-	Source      string           `json:"source"`
-	MinAD       string           `json:"minAD"`
-	MaxAD       string           `json:"maxAD"`
-	Validation  []validationCase `json:"validation"`
-	ADToBS      []adCase         `json:"adToBs"`
-	Parse       []parseCase      `json:"parse"`
-	Format      []formatCase     `json:"format"`
-	AddDays     []addDaysCase    `json:"addDays"`
-	DaysBetween []betweenCase    `json:"daysBetween"`
-	Digits      []digitsCase     `json:"digits"`
-	MonthNames  []monthNameCase  `json:"monthNames"`
-	YearBounds  []yearBoundsCase `json:"yearBounds"`
-	MonthErrors []monthErrorCase `json:"monthErrors"`
-	Age         []ageCase        `json:"age"`
+	Comment      string           `json:"$comment"`
+	Source       string           `json:"source"`
+	MinAD        string           `json:"minAD"`
+	MaxAD        string           `json:"maxAD"`
+	Validation   []validationCase `json:"validation"`
+	ADToBS       []adCase         `json:"adToBs"`
+	Parse        []parseCase      `json:"parse"`
+	Format       []formatCase     `json:"format"`
+	FormatNepali []formatCase     `json:"formatNepali"`
+	Weekdays     []weekdayCase    `json:"weekdays"`
+	AddDays      []addDaysCase    `json:"addDays"`
+	DaysBetween  []betweenCase    `json:"daysBetween"`
+	Digits       []digitsCase     `json:"digits"`
+	MonthNames   []monthNameCase  `json:"monthNames"`
+	YearBounds   []yearBoundsCase `json:"yearBounds"`
+	MonthErrors  []monthErrorCase `json:"monthErrors"`
+	Age          []ageCase        `json:"age"`
 }
 
 type yearBoundsCase struct {
@@ -300,7 +311,20 @@ func cases() casesFile {
 		d := bs.MustParse(s)
 		for _, layout := range layouts {
 			f.Format = append(f.Format, formatCase{s, layout, must(d.Format(layout))})
+			f.FormatNepali = append(f.FormatNepali, formatCase{s, layout, must(d.FormatNepali(layout))})
 		}
+		for _, layout := range []string{"मिति: YYYY/MM/DD", "YYYY 1", "dddd"} {
+			f.FormatNepali = append(f.FormatNepali, formatCase{s, layout, must(d.FormatNepali(layout))})
+		}
+	}
+
+	for weekday := -1; weekday <= 7; weekday++ {
+		nepali, err := bs.WeekdayNameNepali(time.Weekday(weekday))
+		c := weekdayCase{Weekday: weekday, Nepali: nepali, Error: errKind(err)}
+		if err == nil {
+			c.Name = time.Weekday(weekday).String()
+		}
+		f.Weekdays = append(f.Weekdays, c)
 	}
 
 	addDates := []string{"1979-01-01", "1979-01-02", "2079-12-30", "2080-01-01", "2080-06-30", "2083-06-06", "2083-06-31", "2100-12-30", "2100-12-31"}

@@ -26,6 +26,7 @@ export {
 export { firstWeekdayOfBsMonth, getBsMonthCalendar, weeksInBsMonth } from "./calendar";
 export { getBsAge, type BSAge } from "./age";
 export { compareBsDates, isAfterBs, isBeforeBs, isEqualBs } from "./compare";
-export { formatBsDate, parseBsDate } from "./format";
+export { formatBsDate, parseBsDate, type FormatBsDateOptions } from "./format";
 export { getBsMonthName, getBsMonthNameNepali } from "./months";
+export { getBsWeekdayName, getBsWeekdayNameNepali } from "./weekdays";
 export { fromNepaliDigits, toNepaliDigits } from "./digits";

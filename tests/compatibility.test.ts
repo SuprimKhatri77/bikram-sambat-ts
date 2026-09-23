@@ -21,6 +21,8 @@ import {
   getBsDayOfWeek,
   getBsDayOfYear,
   getBsMonthCalendar,
+  getBsWeekdayName,
+  getBsWeekdayNameNepali,
   getBsMonthName,
   getBsMonthNameNepali,
   isValidBsDate,
@@ -36,7 +38,7 @@ import {
 } from "../src";
 import { SKIPPED_LOCAL_DAYS, bs, expectGoError, localDate, localYmd } from "./helpers";
 
-const GO_SOURCE = "github.com/suprimkhatri77/go-bs@v0.6.1";
+const GO_SOURCE = "github.com/suprimkhatri77/go-bs@v0.7.0";
 
 describe(`every supported date matches ${GO_SOURCE}`, () => {
   const days = conversions.days as [string, string, number, number][];
@@ -113,6 +115,25 @@ describe("edge cases match go-bs", () => {
   test("formatBsDate (Date.Format)", () => {
     for (const c of cases.format) {
       expect(formatBsDate(bs(c.bs), c.layout)).toBe(c.output);
+    }
+  });
+
+  test("formatBsDate with { nepali: true } (Date.FormatNepali)", () => {
+    expect(cases.formatNepali.length).toBeGreaterThan(90);
+    for (const c of cases.formatNepali) {
+      expect(formatBsDate(bs(c.bs), c.layout, { nepali: true })).toBe(c.output);
+    }
+  });
+
+  test("weekday names (time.Weekday.String / WeekdayNameNepali)", () => {
+    for (const c of cases.weekdays) {
+      if (c.error === "") {
+        expect(getBsWeekdayName(c.weekday)).toBe(c.name);
+        expect(getBsWeekdayNameNepali(c.weekday)).toBe(c.nepali);
+      } else {
+        expectGoError(() => getBsWeekdayName(c.weekday), c.error);
+        expectGoError(() => getBsWeekdayNameNepali(c.weekday), c.error);
+      }
     }
   });
 

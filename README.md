@@ -13,7 +13,7 @@ as go-bs for every one of the 44,562 supported days.
 ✓ 122 BS years, 1,464 BS months
 ✓ Every supported date checked against go-bs, in both directions
 ✓ Zero runtime dependencies, zero network requests
-✓ ESM + CommonJS + type declarations, tree-shakable (~2.5 KB gzipped in total)
+✓ ESM + CommonJS + type declarations, tree-shakable (~3.5 KB gzipped in total)
 ```
 
 ## Features
@@ -23,7 +23,8 @@ as go-bs for every one of the 44,562 supported days.
   including `NaN`, `Infinity`, fractional values and `Invalid Date`
 - Day arithmetic and comparison, month and year helpers, age, and a
   calendar-grid builder for calendar UIs
-- Formatting and parsing, English and Nepali month names, Nepali digits
+- Formatting and parsing, in English or Nepali (Devanagari digits, Nepali
+  month and weekday names)
 - TypeScript-first, strict types, no `any`
 - Works in Node.js, Bun, Deno, browsers, React, Next.js and Vite. There are no
   Node-only APIs in the library code.
@@ -175,43 +176,63 @@ for (const week of getBsMonthCalendar(2083, 6)) {
 ### Formatting and parsing
 
 ```ts
-import { formatBsDate, parseBsDate } from "bikram-sambat-ts";
+import { formatBsDate, parseBsDate, todayBs } from "bikram-sambat-ts";
 
-formatBsDate({ year: 2083, month: 6, day: 6 }); // "2083-06-06"
-formatBsDate({ year: 2083, month: 6, day: 6 }, "dddd, MMMM D, YYYY"); // "Tuesday, Ashwin 6, 2083"
+const d = { year: 2083, month: 6, day: 7 };
+
+formatBsDate(d); // "2083-06-07"
+formatBsDate(d, "dddd, MMMM D, YYYY"); // "Wednesday, Ashwin 7, 2083"
 parseBsDate("2083-06-15"); // { year: 2083, month: 6, day: 15 }
+
+// In Nepali: Devanagari digits, Nepali month and weekday names
+formatBsDate(d, { nepali: true }); // "२०८३-०६-०७"
+formatBsDate(d, "dddd, MMMM D, YYYY", { nepali: true }); // "बुधवार, असोज ७, २०८३"
+
+// Today's date in Nepal, in Nepali
+formatBsDate(todayBs(), "dddd, MMMM D, YYYY", { nepali: true });
 ```
 
-The layout tokens are the same as go-bs's `Date.Format`:
+The layout tokens are the same as go-bs's `Date.Format`, and
+`{ nepali: true }` matches go-bs's `Date.FormatNepali`:
 
-| Token  | Output               | Example   |
-| ------ | -------------------- | --------- |
-| `YYYY` | 4-digit year         | `2083`    |
-| `YY`   | 2-digit year         | `83`      |
-| `MMMM` | English month name   | `Ashwin`  |
-| `MM`   | month, zero-padded   | `06`      |
-| `M`    | month                | `6`       |
-| `DD`   | day, zero-padded     | `06`      |
-| `D`    | day                  | `6`       |
-| `dddd` | English weekday name | `Tuesday` |
-| `ddd`  | 3-letter weekday     | `Tue`     |
+| Token  | Output             | English     | `nepali: true` |
+| ------ | ------------------ | ----------- | -------------- |
+| `YYYY` | 4-digit year       | `2083`      | `२०८३`         |
+| `YY`   | 2-digit year       | `83`        | `८३`           |
+| `MMMM` | month name         | `Ashwin`    | `असोज`         |
+| `MM`   | month, zero-padded | `06`        | `०६`           |
+| `M`    | month              | `6`         | `६`            |
+| `DD`   | day, zero-padded   | `07`        | `०७`           |
+| `D`    | day                | `7`         | `७`            |
+| `dddd` | weekday name       | `Wednesday` | `बुधवार`       |
+| `ddd`  | short weekday name | `Wed`       | `बुध`          |
 
-Any other character is copied as-is. There's no escaping, so a literal `D` or
-`M` in the layout is always treated as a token. `parseBsDate` accepts only
-`YYYY-MM-DD` (zero-padded, ASCII digits).
+Any other character is copied as-is, including ASCII digits in Nepali mode.
+There's no escaping, so a literal `D` or `M` in the layout is always treated as
+a token. `parseBsDate` accepts only `YYYY-MM-DD` (zero-padded, ASCII digits);
+for Nepali digits, convert with `fromNepaliDigits` first.
 
-### Month names and Nepali digits
+The Nepali weekday names follow Hamro Patro's calendar (आइतवार, सोमवार,
+मंगलवार, बुधवार, बिहिवार, शुक्रवार, शनिवार), the same source as the month
+names. The short forms drop "वार" (आइत, सोम, …). The Nepal Academy standard
+spelling uses -बार instead (आइतबार, …); both are in common use.
+
+### Month and weekday names, Nepali digits
 
 ```ts
 import {
   fromNepaliDigits,
   getBsMonthName,
   getBsMonthNameNepali,
+  getBsWeekdayName,
+  getBsWeekdayNameNepali,
   toNepaliDigits,
 } from "bikram-sambat-ts";
 
 getBsMonthName(6); // "Ashwin"
 getBsMonthNameNepali(6); // "असोज"
+getBsWeekdayName(3); // "Wednesday"
+getBsWeekdayNameNepali(3); // "बुधवार"
 toNepaliDigits("2083-06-06"); // "२०८३-०६-०६"
 toNepaliDigits(2083); // "२०८३"
 fromNepaliDigits("२०८३-०६-०६"); // "2083-06-06"
@@ -258,11 +279,14 @@ isBeforeBs(a: BSDate, b: BSDate): boolean
 isAfterBs(a: BSDate, b: BSDate): boolean
 isEqualBs(a: BSDate, b: BSDate): boolean
 
-formatBsDate(date: BSDate, layout?: string): string // default "YYYY-MM-DD"
+formatBsDate(date: BSDate, layout?: string, options?: { nepali?: boolean }): string // default "YYYY-MM-DD"
+formatBsDate(date: BSDate, options?: { nepali?: boolean }): string
 parseBsDate(value: string): BSDate
 
 getBsMonthName(month: number): string
 getBsMonthNameNepali(month: number): string
+getBsWeekdayName(weekday: number): string // 0 = "Sunday"
+getBsWeekdayNameNepali(weekday: number): string // 0 = "आइतवार"
 toNepaliDigits(value: string | number): string
 fromNepaliDigits(value: string): string
 
@@ -351,7 +375,7 @@ BS month lengths don't follow a formula. They come from Nepal's published
 calendar, stored as a static table in the package. There's no API call, no
 scraping and no network access at runtime; the package works fully offline.
 
-The table is exported directly from go-bs (currently **v0.6.1**) by a
+The table is exported directly from go-bs (currently **v0.7.0**) by a
 maintainer tool, and it's committed as `data/calendar.json` and the generated
 `src/data.ts`. go-bs got its data from Hamro Patro's calendar data for BS
 2000–2100, and from the amitgaru/nepali-datetime table for BS 1979–1999. It's

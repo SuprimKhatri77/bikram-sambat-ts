@@ -5,6 +5,20 @@ below 1.0.0, minor versions may still change the API.
 
 ## 0.3.0 - Unreleased
 
+Based on go-bs v0.7.0.
+
+Nepali formatting:
+
+- `formatBsDate(date, layout?, { nepali: true })` (or
+  `formatBsDate(date, { nepali: true })`): the same layout tokens rendered in
+  Nepali, with Devanagari digits, Nepali month names (`MMMM`), Nepali weekday
+  names (`dddd`) and short weekday names (`ddd`), e.g. "बुधवार, असोज ७, २०८३".
+  Matches go-bs's `Date.FormatNepali`. The new `FormatBsDateOptions` type
+  describes the options.
+- `getBsWeekdayName`, `getBsWeekdayNameNepali`: weekday names for a
+  `Date#getDay()`-style number. The Nepali names follow Hamro Patro's spelling
+  (आइतवार … शनिवार), like go-bs.
+
 The rest of go-bs's date helpers, checked against go-bs for every supported
 month:
 
