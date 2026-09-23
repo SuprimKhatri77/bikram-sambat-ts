@@ -1,14 +1,5 @@
 name: publish
 
-# Publishes to npm when a GitHub release is published, using npm trusted
-# publishing (OIDC): no long-lived npm token is stored anywhere.
-#
-# One-time setup, before this can work (see CONTRIBUTING.md / README):
-#   1. Publish the first version by hand (`npm publish`) so the package exists.
-#   2. On npmjs.com, package settings -> Trusted publishing -> GitHub Actions:
-#      this repository, workflow file "publish.yml".
-# Until then, this workflow fails at the publish step and nothing is released.
-
 on:
   release:
     types: [published]
