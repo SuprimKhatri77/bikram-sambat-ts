@@ -16,6 +16,7 @@ assert.equal(
 );
 assert.throws(() => bs.adToBs(new Date(2044, 3, 14)), bs.DateOutOfRangeError);
 assert.throws(() => bs.parseBsDate("2083/06/06"), bs.BSDateFormatError);
+assert.deepEqual(bs.todayBs(new Date("2026-09-22T20:00:00Z")), { year: 2083, month: 6, day: 7 });
 assert.equal(bs.MIN_BS_YEAR, 1979);
 assert.equal(bs.MAX_BS_YEAR, 2100);
 

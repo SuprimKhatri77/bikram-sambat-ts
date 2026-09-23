@@ -7,6 +7,7 @@ export {
   type InvalidBSDateField,
 } from "./errors";
 export { adToBs, bsToAd } from "./convert";
+export { todayBs } from "./today";
 export { daysInBsMonth, daysInBsYear, isSupportedBsYear, isValidBsDate } from "./validate";
 export { addBsDays, daysBetweenBs, getBsDayOfWeek, subtractBsDays } from "./arithmetic";
 export { compareBsDates, isAfterBs, isBeforeBs, isEqualBs } from "./compare";

@@ -52,6 +52,19 @@ adToBs(new Date(2026, 8, 22)); // { year: 2083, month: 6, day: 6 }
 adToBs(new Date());
 ```
 
+### Today in Nepal
+
+```ts
+import { todayBs } from "bikram-sambat-ts";
+
+todayBs(); // today's BS date in Nepal (UTC+05:45), whatever the runtime's timezone
+todayBs(new Date("2026-09-22T20:00:00Z")); // { year: 2083, month: 6, day: 7 }
+```
+
+Use `todayBs()` on servers, where "today" should mean today in Nepal. In a
+browser, `adToBs(new Date())` gives the user's own calendar day, which is the
+same thing for users in Nepal. See [Timezone behavior](#timezone-behavior).
+
 ### BS → AD
 
 BS months are **one-based**: 1 is Baisakh and 12 is Chaitra.
@@ -163,6 +176,7 @@ type Weekday = 0 | 1 | 2 | 3 | 4 | 5 | 6; // 0 = Sunday
 
 adToBs(date: Date): BSDate
 bsToAd(date: BSDate): Date
+todayBs(now?: Date): BSDate // today in Nepal (UTC+05:45)
 
 isValidBsDate(date: BSDate): boolean
 isSupportedBsYear(year: number): boolean
@@ -251,8 +265,9 @@ Things to watch for:
   date.
 - **`adToBs(new Date())` gives today in the device's timezone.** On a server
   running in UTC, that isn't today in Nepal for the 5 h 45 min after midnight
-  Nepal time. go-bs has a `TodayBS` helper that always uses Nepal time. This
-  package doesn't have one yet (see the changelog).
+  Nepal time. Use `todayBs()` instead: like go-bs's `TodayBS`, it always uses
+  Nepal Standard Time (a fixed UTC+05:45, so it doesn't depend on the
+  runtime's timezone data).
 - A handful of timezones skipped a whole calendar day when they moved across
   the International Date Line. In this range those are 1994-12-31 in
   `Pacific/Kiritimati` and 2011-12-30 in `Pacific/Apia`. No `Date` has that
@@ -302,7 +317,7 @@ Deliberate differences from go-bs:
 - `formatBsDate` with no layout validates, like go-bs's `Format`, unlike its
   `String`.
 - Not included yet: go-bs's `NextMonth`/`PreviousMonth`, start/end-of-month and
-  -year helpers, `DayOfYear`, `Age`, `TodayBS`, `MonthCalendar` and the
+  -year helpers, `DayOfYear`, `Age`, `MonthCalendar` and the
   JSON/SQL encoders.
 
 ## Testing

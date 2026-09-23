@@ -4,7 +4,8 @@ import { DateOutOfRangeError } from "./errors";
 import type { BSDate } from "./types";
 import { assertValidBsDate } from "./validate";
 
-const MS_PER_DAY = 86_400_000;
+/** @internal */
+export const MS_PER_DAY = 86_400_000;
 
 /**
  * Returns the number of days since 1970-01-01 of the given proleptic
@@ -118,13 +119,32 @@ function formatDayNumber(day: number): string {
  * AD 2044-04-13 (the Gregorian equivalents of BS 1979-01-01 and 2100-12-31).
  */
 export function adToBs(date: Date): BSDate {
+  assertDate(date, "adToBs");
+  return gregorianDayToBs(dayNumber(date.getFullYear(), date.getMonth(), date.getDate()));
+}
+
+/**
+ * Throws a TypeError unless `date` is a valid Date. `fn` names the public
+ * function for the message.
+ *
+ * @internal
+ */
+export function assertDate(date: Date, fn: string): void {
   if (Object.prototype.toString.call(date) !== "[object Date]") {
-    throw new TypeError("bs: adToBs expects a Date");
+    throw new TypeError(`bs: ${fn} expects a Date`);
   }
   if (Number.isNaN(date.getTime())) {
-    throw new TypeError("bs: adToBs got an Invalid Date");
+    throw new TypeError(`bs: ${fn} got an Invalid Date`);
   }
-  const day = dayNumber(date.getFullYear(), date.getMonth(), date.getDate());
+}
+
+/**
+ * Returns the BS date for a Gregorian day number (days since 1970-01-01), or
+ * throws DateOutOfRangeError if it lies outside the supported range.
+ *
+ * @internal
+ */
+export function gregorianDayToBs(day: number): BSDate {
   const result = dayNumberToBs(day);
   if (result === undefined) {
     const side = day < REFERENCE_DAY ? "before the minimum" : "after the maximum";
