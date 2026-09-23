@@ -41,7 +41,7 @@ describe("calendar data", () => {
   });
 
   test("src/data.ts matches the canonical data/calendar.json exported from go-bs", () => {
-    expect(calendar.source).toBe("github.com/suprimkhatri77/go-bs@v0.6.1");
+    expect(calendar.source).toBe("github.com/suprimkhatri77/go-bs@v0.7.0");
     expect(calendar.minYear).toBe(MIN_BS_YEAR);
     expect(calendar.maxYear).toBe(MAX_BS_YEAR);
     const years = calendar.years as Record<string, number[]>;

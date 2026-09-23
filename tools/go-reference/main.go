@@ -15,7 +15,8 @@
 //
 //	data/calendar.json               canonical month-length table
 //	tests/fixtures/go-conversions.json  every supported BS date and Go's AD/weekday/day-of-year for it
-//	tests/fixtures/go-cases.json        edge cases: validation, parsing, formatting, arithmetic, out-of-range
+//	tests/fixtures/go-cases.json        edge cases: validation, parsing, formatting, arithmetic, out-of-range, age
+//	tests/fixtures/go-months.json       every supported BS month: calendar grid, start/end, next/previous month
 package main
 
 import (
@@ -35,7 +36,7 @@ import (
 // goBSVersion must match the go-bs version required in go.mod. It's recorded
 // in every output file so a fixture can always be traced to the exact Go
 // release it came from.
-const goBSVersion = "v0.6.1"
+const goBSVersion = "v0.7.0"
 
 const source = "github.com/suprimkhatri77/go-bs@" + goBSVersion
 
@@ -46,6 +47,8 @@ func main() {
 	writeJSON(filepath.Join(*root, "data", "calendar.json"), calendar())
 	writeConversions(filepath.Join(*root, "tests", "fixtures", "go-conversions.json"), conversions())
 	writeJSON(filepath.Join(*root, "tests", "fixtures", "go-cases.json"), cases())
+	m := months()
+	writeRows(filepath.Join(*root, "tests", "fixtures", "go-months.json"), m.Comment, m.Source, "months", m.Months)
 }
 
 // errKind maps a go-bs sentinel error to the short name the TypeScript tests
@@ -64,6 +67,10 @@ func errKind(err error) string {
 		return "format"
 	case errors.Is(err, bs.ErrOutOfRange):
 		return "outOfRange"
+	case errors.Is(err, bs.ErrInvalidDateOrder):
+		return "dateOrder"
+	case errors.Is(err, bs.ErrInvalidWeekday):
+		return "weekday"
 	default:
 		log.Fatalf("unexpected error kind: %v", err)
 		return ""
@@ -161,6 +168,13 @@ type formatCase struct {
 	Output string `json:"output"`
 }
 
+type weekdayCase struct {
+	Weekday int    `json:"weekday"`
+	Name    string `json:"name"`
+	Nepali  string `json:"nepali"`
+	Error   string `json:"error"`
+}
+
 type addDaysCase struct {
 	BS     string `json:"bs"`
 	Days   int    `json:"days"`
@@ -188,18 +202,51 @@ type monthNameCase struct {
 }
 
 type casesFile struct {
-	Comment     string           `json:"$comment"`
-	Source      string           `json:"source"`
-	MinAD       string           `json:"minAD"`
-	MaxAD       string           `json:"maxAD"`
-	Validation  []validationCase `json:"validation"`
-	ADToBS      []adCase         `json:"adToBs"`
-	Parse       []parseCase      `json:"parse"`
-	Format      []formatCase     `json:"format"`
-	AddDays     []addDaysCase    `json:"addDays"`
-	DaysBetween []betweenCase    `json:"daysBetween"`
-	Digits      []digitsCase     `json:"digits"`
-	MonthNames  []monthNameCase  `json:"monthNames"`
+	Comment      string           `json:"$comment"`
+	Source       string           `json:"source"`
+	MinAD        string           `json:"minAD"`
+	MaxAD        string           `json:"maxAD"`
+	Validation   []validationCase `json:"validation"`
+	ADToBS       []adCase         `json:"adToBs"`
+	Parse        []parseCase      `json:"parse"`
+	Format       []formatCase     `json:"format"`
+	FormatNepali []formatCase     `json:"formatNepali"`
+	Weekdays     []weekdayCase    `json:"weekdays"`
+	AddDays      []addDaysCase    `json:"addDays"`
+	DaysBetween  []betweenCase    `json:"daysBetween"`
+	Digits       []digitsCase     `json:"digits"`
+	MonthNames   []monthNameCase  `json:"monthNames"`
+	YearBounds   []yearBoundsCase `json:"yearBounds"`
+	MonthErrors  []monthErrorCase `json:"monthErrors"`
+	Age          []ageCase        `json:"age"`
+}
+
+type yearBoundsCase struct {
+	Year  int    `json:"year"`
+	Start string `json:"start"`
+	End   string `json:"end"`
+	Error string `json:"error"`
+}
+
+// monthErrorCase records the error go-bs returns from the month-based
+// helpers for a year/month that isn't supported.
+type monthErrorCase struct {
+	Year               int    `json:"year"`
+	Month              int    `json:"month"`
+	StartOfMonth       string `json:"startOfMonth"`
+	EndOfMonth         string `json:"endOfMonth"`
+	FirstWeekday       string `json:"firstWeekday"`
+	WeeksInMonth       string `json:"weeksInMonth"`
+	MonthCalendarError string `json:"monthCalendar"`
+}
+
+type ageCase struct {
+	Birth  string `json:"birth"`
+	Today  string `json:"today"`
+	Years  int    `json:"years"`
+	Months int    `json:"months"`
+	Days   int    `json:"days"`
+	Error  string `json:"error"`
 }
 
 func cases() casesFile {
@@ -264,7 +311,20 @@ func cases() casesFile {
 		d := bs.MustParse(s)
 		for _, layout := range layouts {
 			f.Format = append(f.Format, formatCase{s, layout, must(d.Format(layout))})
+			f.FormatNepali = append(f.FormatNepali, formatCase{s, layout, must(d.FormatNepali(layout))})
 		}
+		for _, layout := range []string{"मिति: YYYY/MM/DD", "YYYY 1", "dddd"} {
+			f.FormatNepali = append(f.FormatNepali, formatCase{s, layout, must(d.FormatNepali(layout))})
+		}
+	}
+
+	for weekday := -1; weekday <= 7; weekday++ {
+		nepali, err := bs.WeekdayNameNepali(time.Weekday(weekday))
+		c := weekdayCase{Weekday: weekday, Nepali: nepali, Error: errKind(err)}
+		if err == nil {
+			c.Name = time.Weekday(weekday).String()
+		}
+		f.Weekdays = append(f.Weekdays, c)
 	}
 
 	addDates := []string{"1979-01-01", "1979-01-02", "2079-12-30", "2080-01-01", "2080-06-30", "2083-06-06", "2083-06-31", "2100-12-30", "2100-12-31"}
@@ -297,6 +357,98 @@ func cases() casesFile {
 		f.MonthNames = append(f.MonthNames, monthNameCase{month, name, nepali, errKind(err)})
 	}
 
+	for _, year := range []int{bs.MinBSYear - 1, bs.MinBSYear, 2000, 2083, 2087, 2096, bs.MaxBSYear, bs.MaxBSYear + 1} {
+		d := bs.Date{Year: year, Month: 1, Day: 1}
+		start, err := d.StartOfYear()
+		c := yearBoundsCase{Year: year, Error: errKind(err)}
+		if err == nil {
+			c.Start = start.String()
+			c.End = must(d.EndOfYear()).String()
+		}
+		f.YearBounds = append(f.YearBounds, c)
+	}
+
+	for _, ym := range [][2]int{{bs.MinBSYear - 1, 12}, {bs.MaxBSYear + 1, 1}, {2083, 0}, {2083, 13}, {2083, -1}} {
+		d := bs.Date{Year: ym[0], Month: ym[1], Day: 1}
+		_, errStart := d.StartOfMonth()
+		_, errEnd := d.EndOfMonth()
+		_, errFirst := bs.FirstWeekdayOfMonth(ym[0], ym[1])
+		_, errWeeks := bs.WeeksInMonth(ym[0], ym[1])
+		_, errCal := bs.MonthCalendar(ym[0], ym[1])
+		f.MonthErrors = append(f.MonthErrors, monthErrorCase{ym[0], ym[1], errKind(errStart), errKind(errEnd), errKind(errFirst), errKind(errWeeks), errKind(errCal)})
+	}
+
+	// Age: every pair from a set of dates chosen around month ends (where
+	// days are borrowed), 32-day months, year ends and both range ends.
+	ageDates := []string{
+		"1979-01-01", "1990-05-15", "2000-01-30", "2040-03-32", "2060-06-15", "2082-12-30",
+		"2083-01-01", "2083-02-31", "2083-03-32", "2083-04-01", "2083-06-06", "2083-06-07",
+		"2083-06-31", "2084-01-01", "2084-03-31", "2100-12-31",
+	}
+	for _, birth := range ageDates {
+		for _, today := range ageDates {
+			years, months, days, err := bs.Age(bs.MustParse(birth), bs.MustParse(today))
+			f.Age = append(f.Age, ageCase{birth, today, years, months, days, errKind(err)})
+		}
+	}
+
+	return f
+}
+
+type monthsFile struct {
+	Comment string
+	Source  string
+	// Months holds one row per supported BS month, in order:
+	// [ "YYYY-MM", first weekday, weeks, grid, startOfMonth, endOfMonth, steps ]
+	// where grid is MonthCalendar with 0 for empty cells, and steps is a list
+	// of [day, NextMonth, PreviousMonth] for days 1, 28 and each of 29-32
+	// that exists in the month. A result is "YYYY-MM-DD", or "!" plus the
+	// error kind.
+	Months []any
+}
+
+func stepResult(d bs.Date, err error) string {
+	if err != nil {
+		return "!" + errKind(err)
+	}
+	return d.String()
+}
+
+func months() monthsFile {
+	f := monthsFile{
+		Comment: "Generated by tools/go-reference. Each entry: [BS year-month, FirstWeekdayOfMonth (0 = Sunday), WeeksInMonth, MonthCalendar (0 = empty cell), StartOfMonth, EndOfMonth, [[day, NextMonth, PreviousMonth], ...]]. A result starting with ! is a go-bs error kind.",
+		Source:  source,
+	}
+	for year := bs.MinBSYear; year <= bs.MaxBSYear; year++ {
+		for month := 1; month <= 12; month++ {
+			first := must(bs.FirstWeekdayOfMonth(year, month))
+			weeks := must(bs.WeeksInMonth(year, month))
+			var grid [][]int
+			for _, week := range must(bs.MonthCalendar(year, month)) {
+				row := make([]int, len(week))
+				for i, cell := range week {
+					if cell != nil {
+						row[i] = cell.Day
+					}
+				}
+				grid = append(grid, row)
+			}
+			d := bs.Date{Year: year, Month: month, Day: 1}
+			start := must(d.StartOfMonth())
+			end := must(d.EndOfMonth())
+			var steps [][3]any
+			for _, day := range []int{1, 28, 29, 30, 31, 32} {
+				if !bs.IsValid(year, month, day) {
+					continue
+				}
+				date := bs.Date{Year: year, Month: month, Day: day}
+				next, errNext := date.NextMonth()
+				prev, errPrev := date.PreviousMonth()
+				steps = append(steps, [3]any{day, stepResult(next, errNext), stepResult(prev, errPrev)})
+			}
+			f.Months = append(f.Months, []any{fmt.Sprintf("%04d-%02d", year, month), int(first), weeks, grid, start.String(), end.String(), steps})
+		}
+	}
 	return f
 }
 
@@ -304,17 +456,27 @@ func cases() casesFile {
 // line: indenting every tuple element onto its own line would roughly
 // triple the file's size for no gain in readability.
 func writeConversions(path string, f conversionsFile) {
+	rows := make([]any, len(f.Days))
+	for i, day := range f.Days {
+		rows[i] = day
+	}
+	writeRows(path, f.Comment, f.Source, "days", rows)
+}
+
+// writeRows writes a JSON object with $comment, source, count and a key
+// holding rows, one row per line.
+func writeRows(path, comment, source, key string, rows []any) {
 	var b strings.Builder
 	header := must(json.Marshal(struct {
 		Comment string `json:"$comment"`
 		Source  string `json:"source"`
 		Count   int    `json:"count"`
-	}{f.Comment, f.Source, f.Count}))
+	}{comment, source, len(rows)}))
 	b.Write(header[:len(header)-1])
-	b.WriteString(",\n\"days\": [\n")
-	for i, day := range f.Days {
-		b.Write(must(json.Marshal(day)))
-		if i < len(f.Days)-1 {
+	fmt.Fprintf(&b, ",\n%q: [\n", key)
+	for i, row := range rows {
+		b.Write(must(json.Marshal(row)))
+		if i < len(rows)-1 {
 			b.WriteByte(',')
 		}
 		b.WriteByte('\n')

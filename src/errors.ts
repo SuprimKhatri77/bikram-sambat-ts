@@ -50,3 +50,15 @@ export class BSDateFormatError extends SyntaxError {
     this.input = input;
   }
 }
+
+/**
+ * Thrown when two dates are the wrong way round, e.g. by {@link getBsAge} when
+ * the birth date is after the reference date. Corresponds to go-bs's
+ * `ErrInvalidDateOrder`.
+ */
+export class InvalidDateOrderError extends RangeError {
+  constructor(message: string) {
+    super(message);
+    this.name = "InvalidDateOrderError";
+  }
+}

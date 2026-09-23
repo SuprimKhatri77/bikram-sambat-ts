@@ -28,7 +28,7 @@ src/data.ts                         generated, committed, DO NOT EDIT
 ```
 
 `tools/go-reference` depends on the **published** go-bs module (currently
-`github.com/suprimkhatri77/go-bs@v0.6.1`, pinned in its `go.mod` and checked
+`github.com/suprimkhatri77/go-bs@v0.7.0`, pinned in its `go.mod` and checked
 against `go.sum`), not a local checkout. It reads the table through go-bs's
 public API (`DaysInMonth`), not by parsing go-bs's source. Every output file
 records the go-bs version it came from, and the test suite checks that version.

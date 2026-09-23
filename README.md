@@ -13,7 +13,7 @@ as go-bs for every one of the 44,562 supported days.
 ✓ 122 BS years, 1,464 BS months
 ✓ Every supported date checked against go-bs, in both directions
 ✓ Zero runtime dependencies, zero network requests
-✓ ESM + CommonJS + type declarations, tree-shakable (~2.5 KB gzipped in total)
+✓ ESM + CommonJS + type declarations, tree-shakable (~3.5 KB gzipped in total)
 ```
 
 ## Features
@@ -21,8 +21,10 @@ as go-bs for every one of the 44,562 supported days.
 - `adToBs` / `bsToAd` conversion
 - Strict validation against real BS month lengths (not just a 1–32 check),
   including `NaN`, `Infinity`, fractional values and `Invalid Date`
-- Day arithmetic and comparison
-- Formatting and parsing, English and Nepali month names, Nepali digits
+- Day arithmetic and comparison, month and year helpers, age, and a
+  calendar-grid builder for calendar UIs
+- Formatting and parsing, in English or Nepali (Devanagari digits, Nepali
+  month and weekday names)
 - TypeScript-first, strict types, no `any`
 - Works in Node.js, Bun, Deno, browsers, React, Next.js and Vite. There are no
   Node-only APIs in the library code.
@@ -120,46 +122,117 @@ isEqualBs(d, { year: 2083, month: 6, day: 6 }); // true
 [d, addBsDays(d, -1)].sort(compareBsDates); // oldest first
 ```
 
+### Months, years and age
+
+```ts
+import {
+  endOfBsMonth,
+  endOfBsYear,
+  getBsAge,
+  getBsDayOfYear,
+  nextBsMonth,
+  previousBsMonth,
+  startOfBsMonth,
+  startOfBsYear,
+} from "bikram-sambat-ts";
+
+const d = { year: 2083, month: 6, day: 31 };
+
+nextBsMonth(d); // { year: 2083, month: 7, day: 30 } (Kartik has 30 days, so the day is clamped)
+previousBsMonth(d); // { year: 2083, month: 5, day: 31 }
+startOfBsMonth(d); // { year: 2083, month: 6, day: 1 }
+endOfBsMonth(d); // { year: 2083, month: 6, day: 31 }
+startOfBsYear(d); // { year: 2083, month: 1, day: 1 }
+endOfBsYear(d); // { year: 2083, month: 12, day: 30 }
+getBsDayOfYear(d); // 187
+
+getBsAge({ year: 2060, month: 6, day: 15 }, { year: 2083, month: 6, day: 7 });
+// { years: 22, months: 11, days: 23 }
+getBsAge({ year: 2060, month: 6, day: 15 }); // age as of today in Nepal
+```
+
+`nextBsMonth`/`previousBsMonth` clamp to the target month's last day rather
+than rolling over, like go-bs's `NextMonth`/`PreviousMonth`.
+
+### Calendar grid
+
+```ts
+import { firstWeekdayOfBsMonth, getBsMonthCalendar, weeksInBsMonth } from "bikram-sambat-ts";
+
+firstWeekdayOfBsMonth(2083, 6); // 4 (Thursday)
+weeksInBsMonth(2083, 6); // 5
+
+// Weeks run Sunday to Saturday; null means no day of this month in that cell.
+for (const week of getBsMonthCalendar(2083, 6)) {
+  console.log(week.map((cell) => (cell ? String(cell.day).padStart(2) : "  ")).join(" "));
+}
+//              1  2  3
+//  4  5  6  7  8  9 10
+// 11 12 13 14 15 16 17
+// 18 19 20 21 22 23 24
+// 25 26 27 28 29 30 31
+```
+
 ### Formatting and parsing
 
 ```ts
-import { formatBsDate, parseBsDate } from "bikram-sambat-ts";
+import { formatBsDate, parseBsDate, todayBs } from "bikram-sambat-ts";
 
-formatBsDate({ year: 2083, month: 6, day: 6 }); // "2083-06-06"
-formatBsDate({ year: 2083, month: 6, day: 6 }, "dddd, MMMM D, YYYY"); // "Tuesday, Ashwin 6, 2083"
+const d = { year: 2083, month: 6, day: 7 };
+
+formatBsDate(d); // "2083-06-07"
+formatBsDate(d, "dddd, MMMM D, YYYY"); // "Wednesday, Ashwin 7, 2083"
 parseBsDate("2083-06-15"); // { year: 2083, month: 6, day: 15 }
+
+// In Nepali: Devanagari digits, Nepali month and weekday names
+formatBsDate(d, { nepali: true }); // "२०८३-०६-०७"
+formatBsDate(d, "dddd, MMMM D, YYYY", { nepali: true }); // "बुधवार, असोज ७, २०८३"
+
+// Today's date in Nepal, in Nepali
+formatBsDate(todayBs(), "dddd, MMMM D, YYYY", { nepali: true });
 ```
 
-The layout tokens are the same as go-bs's `Date.Format`:
+The layout tokens are the same as go-bs's `Date.Format`, and
+`{ nepali: true }` matches go-bs's `Date.FormatNepali`:
 
-| Token  | Output               | Example   |
-| ------ | -------------------- | --------- |
-| `YYYY` | 4-digit year         | `2083`    |
-| `YY`   | 2-digit year         | `83`      |
-| `MMMM` | English month name   | `Ashwin`  |
-| `MM`   | month, zero-padded   | `06`      |
-| `M`    | month                | `6`       |
-| `DD`   | day, zero-padded     | `06`      |
-| `D`    | day                  | `6`       |
-| `dddd` | English weekday name | `Tuesday` |
-| `ddd`  | 3-letter weekday     | `Tue`     |
+| Token  | Output             | English     | `nepali: true` |
+| ------ | ------------------ | ----------- | -------------- |
+| `YYYY` | 4-digit year       | `2083`      | `२०८३`         |
+| `YY`   | 2-digit year       | `83`        | `८३`           |
+| `MMMM` | month name         | `Ashwin`    | `असोज`         |
+| `MM`   | month, zero-padded | `06`        | `०६`           |
+| `M`    | month              | `6`         | `६`            |
+| `DD`   | day, zero-padded   | `07`        | `०७`           |
+| `D`    | day                | `7`         | `७`            |
+| `dddd` | weekday name       | `Wednesday` | `बुधवार`       |
+| `ddd`  | short weekday name | `Wed`       | `बुध`          |
 
-Any other character is copied as-is. There's no escaping, so a literal `D` or
-`M` in the layout is always treated as a token. `parseBsDate` accepts only
-`YYYY-MM-DD` (zero-padded, ASCII digits).
+Any other character is copied as-is, including ASCII digits in Nepali mode.
+There's no escaping, so a literal `D` or `M` in the layout is always treated as
+a token. `parseBsDate` accepts only `YYYY-MM-DD` (zero-padded, ASCII digits);
+for Nepali digits, convert with `fromNepaliDigits` first.
 
-### Month names and Nepali digits
+The Nepali weekday names follow Hamro Patro's calendar (आइतवार, सोमवार,
+मंगलवार, बुधवार, बिहिवार, शुक्रवार, शनिवार), the same source as the month
+names. The short forms drop "वार" (आइत, सोम, …). The Nepal Academy standard
+spelling uses -बार instead (आइतबार, …); both are in common use.
+
+### Month and weekday names, Nepali digits
 
 ```ts
 import {
   fromNepaliDigits,
   getBsMonthName,
   getBsMonthNameNepali,
+  getBsWeekdayName,
+  getBsWeekdayNameNepali,
   toNepaliDigits,
 } from "bikram-sambat-ts";
 
 getBsMonthName(6); // "Ashwin"
 getBsMonthNameNepali(6); // "असोज"
+getBsWeekdayName(3); // "Wednesday"
+getBsWeekdayNameNepali(3); // "बुधवार"
 toNepaliDigits("2083-06-06"); // "२०८३-०६-०६"
 toNepaliDigits(2083); // "२०८३"
 fromNepaliDigits("२०८३-०६-०६"); // "2083-06-06"
@@ -187,36 +260,54 @@ addBsDays(date: BSDate, days: number): BSDate
 subtractBsDays(date: BSDate, days: number): BSDate
 daysBetweenBs(from: BSDate, to: BSDate): number // to − from
 getBsDayOfWeek(date: BSDate): Weekday
+getBsDayOfYear(date: BSDate): number
+
+nextBsMonth(date: BSDate): BSDate // clamps the day to the target month
+previousBsMonth(date: BSDate): BSDate
+startOfBsMonth(date: BSDate): BSDate
+endOfBsMonth(date: BSDate): BSDate
+startOfBsYear(date: BSDate): BSDate
+endOfBsYear(date: BSDate): BSDate
+getBsAge(birth: BSDate, today?: BSDate): BSAge // { years, months, days }; today defaults to todayBs()
+
+firstWeekdayOfBsMonth(year: number, month: number): Weekday
+weeksInBsMonth(year: number, month: number): number
+getBsMonthCalendar(year: number, month: number): (BSDate | null)[][] // Sunday-first weeks
 
 compareBsDates(a: BSDate, b: BSDate): -1 | 0 | 1
 isBeforeBs(a: BSDate, b: BSDate): boolean
 isAfterBs(a: BSDate, b: BSDate): boolean
 isEqualBs(a: BSDate, b: BSDate): boolean
 
-formatBsDate(date: BSDate, layout?: string): string // default "YYYY-MM-DD"
+formatBsDate(date: BSDate, layout?: string, options?: { nepali?: boolean }): string // default "YYYY-MM-DD"
+formatBsDate(date: BSDate, options?: { nepali?: boolean }): string
 parseBsDate(value: string): BSDate
 
 getBsMonthName(month: number): string
 getBsMonthNameNepali(month: number): string
+getBsWeekdayName(weekday: number): string // 0 = "Sunday"
+getBsWeekdayNameNepali(weekday: number): string // 0 = "आइतवार"
 toNepaliDigits(value: string | number): string
 fromNepaliDigits(value: string): string
 
 class InvalidBSDateError extends RangeError { field: "year" | "month" | "day" }
 class DateOutOfRangeError extends RangeError {}
 class BSDateFormatError extends SyntaxError { input: string }
+class InvalidDateOrderError extends RangeError {}
 ```
 
 Every function returns a new object and never modifies its arguments.
 
 ### Errors
 
-| Error                 | Thrown when                                                                                   | go-bs equivalent                                       |
-| --------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| `InvalidBSDateError`  | A BS year, month or day is out of range or not an integer. `field` says which one.            | `ErrInvalidYear` / `ErrInvalidMonth` / `ErrInvalidDay` |
-| `DateOutOfRangeError` | An AD date, or the result of `addBsDays`/`subtractBsDays`, falls outside the supported range  | `ErrOutOfRange`                                        |
-| `BSDateFormatError`   | `parseBsDate` gets a string not shaped like `YYYY-MM-DD`                                      | `ErrInvalidFormat`                                     |
-| `TypeError`           | The argument has the wrong type: not a `Date`, an `Invalid Date`, not an object, not a string | —                                                      |
-| `RangeError`          | `addBsDays`/`subtractBsDays` gets a day count that isn't a safe integer                       | —                                                      |
+| Error                   | Thrown when                                                                                   | go-bs equivalent                                       |
+| ----------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| `InvalidBSDateError`    | A BS year, month or day is out of range or not an integer. `field` says which one.            | `ErrInvalidYear` / `ErrInvalidMonth` / `ErrInvalidDay` |
+| `DateOutOfRangeError`   | An AD date, or the result of `addBsDays`/`subtractBsDays`, falls outside the supported range  | `ErrOutOfRange`                                        |
+| `BSDateFormatError`     | `parseBsDate` gets a string not shaped like `YYYY-MM-DD`                                      | `ErrInvalidFormat`                                     |
+| `TypeError`             | The argument has the wrong type: not a `Date`, an `Invalid Date`, not an object, not a string | —                                                      |
+| `InvalidDateOrderError` | `getBsAge` gets a birth date after the reference date                                         | `ErrInvalidDateOrder`                                  |
+| `RangeError`            | `addBsDays`/`subtractBsDays` gets a day count that isn't a safe integer                       | —                                                      |
 
 ```ts
 import { InvalidBSDateError, bsToAd } from "bikram-sambat-ts";
@@ -284,7 +375,7 @@ BS month lengths don't follow a formula. They come from Nepal's published
 calendar, stored as a static table in the package. There's no API call, no
 scraping and no network access at runtime; the package works fully offline.
 
-The table is exported directly from go-bs (currently **v0.6.1**) by a
+The table is exported directly from go-bs (currently **v0.7.0**) by a
 maintainer tool, and it's committed as `data/calendar.json` and the generated
 `src/data.ts`. go-bs got its data from Hamro Patro's calendar data for BS
 2000–2100, and from the amitgaru/nepali-datetime table for BS 1979–1999. It's
@@ -305,9 +396,11 @@ Correctness rests on three separate checks:
    this month by month).
 2. **Independently known AD/BS pairs**, ported from go-bs's `knownPairs`.
 3. **Go comparison fixtures**: the published go-bs module was run once to
-   record its output for every supported day (AD date, weekday, day of year),
-   plus about 1,150 edge cases (validation, parsing, formatting, arithmetic,
-   out-of-range). The tests compare against these recordings and never run Go.
+   record its output for every supported day (AD date, weekday, day of year)
+   and every supported month (calendar grid, start/end, next/previous month),
+   plus about 1,450 edge cases (validation, parsing, formatting, arithmetic,
+   age, out-of-range). The tests compare against these recordings and never
+   run Go.
 
 Deliberate differences from go-bs:
 
@@ -316,9 +409,16 @@ Deliberate differences from go-bs:
   quietly compare as "equal".
 - `formatBsDate` with no layout validates, like go-bs's `Format`, unlike its
   `String`.
-- Not included yet: go-bs's `NextMonth`/`PreviousMonth`, start/end-of-month and
-  -year helpers, `DayOfYear`, `Age`, `MonthCalendar` and the
-  JSON/SQL encoders.
+- `startOfBsMonth`, `endOfBsMonth`, `startOfBsYear` and `endOfBsYear` validate
+  the whole date. go-bs's versions only check the year and month, so they
+  accept an invalid day.
+- `nextBsMonth`/`previousBsMonth` past either end of the range throw
+  `InvalidBSDateError` with `field: "year"`, matching go-bs's `ErrInvalidYear`
+  (whereas `addBsDays` throws `DateOutOfRangeError`, like go-bs's `AddDays`).
+- Not included: go-bs's JSON/SQL encoders, which are Go-specific. A
+  `BSDate` is a plain object, so it already serializes as
+  `{"year":2083,"month":6,"day":6}`; use `formatBsDate`/`parseBsDate` for the
+  `"2083-06-06"` form.
 
 ## Testing
 

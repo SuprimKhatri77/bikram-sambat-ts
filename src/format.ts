@@ -1,13 +1,19 @@
 import { getBsDayOfWeek } from "./arithmetic";
+import { toNepaliDigits } from "./digits";
 import { BSDateFormatError } from "./errors";
-import { getBsMonthName } from "./months";
+import { getBsMonthName, getBsMonthNameNepali } from "./months";
 import type { BSDate } from "./types";
 import { assertValidBsDate } from "./validate";
+import { WEEKDAY_SHORT_NAMES_NEPALI, getBsWeekdayName, getBsWeekdayNameNepali } from "./weekdays";
 
-// prettier-ignore
-const WEEKDAY_NAMES = [
-  "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
-] as const;
+/** Options for {@link formatBsDate}. */
+export interface FormatBsDateOptions {
+  /**
+   * Render in Nepali: numbers in Devanagari digits, and month and weekday
+   * names in Nepali. Default `false`.
+   */
+  nepali?: boolean;
+}
 
 // Longer tokens come before any shorter token that is a prefix of them
 // ("YYYY" before "YY"), so the first match at each position is the longest.
@@ -21,51 +27,70 @@ const pad2 = (n: number): string => String(n).padStart(2, "0");
  * {@link parseBsDate} accepts. Otherwise these tokens are replaced (the same
  * set, and the same longest-match-first rule, as go-bs's `Date.Format`):
  *
- * | Token  | Output                           | Example      |
- * | ------ | -------------------------------- | ------------ |
- * | `YYYY` | 4-digit year                     | `2083`       |
- * | `YY`   | 2-digit year                     | `83`         |
- * | `MMMM` | English month name               | `Ashwin`     |
- * | `MM`   | month, zero-padded               | `06`         |
- * | `M`    | month                            | `6`          |
- * | `DD`   | day, zero-padded                 | `06`         |
- * | `D`    | day                              | `6`          |
- * | `dddd` | English weekday name             | `Tuesday`    |
- * | `ddd`  | 3-letter weekday                 | `Tue`        |
+ * | Token  | Output                    | English     | `nepali: true` |
+ * | ------ | ------------------------- | ----------- | -------------- |
+ * | `YYYY` | 4-digit year              | `2083`      | `२०८३`         |
+ * | `YY`   | 2-digit year              | `83`        | `८३`           |
+ * | `MMMM` | month name                | `Ashwin`    | `असोज`         |
+ * | `MM`   | month, zero-padded        | `06`        | `०६`           |
+ * | `M`    | month                     | `6`         | `६`            |
+ * | `DD`   | day, zero-padded          | `07`        | `०७`           |
+ * | `D`    | day                       | `7`         | `७`            |
+ * | `dddd` | weekday name              | `Wednesday` | `बुधवार`       |
+ * | `ddd`  | short weekday name        | `Wed`       | `बुध`          |
  *
- * Every other character is copied through as-is. There is no escaping, so a
- * literal `D` or `M` in `layout` is always treated as a token.
+ * Every other character is copied through as-is, including ASCII digits in
+ * Nepali mode. There is no escaping, so a literal `D` or `M` in `layout` is
+ * always treated as a token. `{ nepali: true }` matches go-bs's
+ * `Date.FormatNepali`.
  *
  * @example
- * formatBsDate({ year: 2083, month: 6, day: 6 }); // "2083-06-06"
- * formatBsDate({ year: 2083, month: 6, day: 6 }, "dddd, MMMM D, YYYY"); // "Tuesday, Ashwin 6, 2083"
+ * const d = { year: 2083, month: 6, day: 7 };
+ * formatBsDate(d); // "2083-06-07"
+ * formatBsDate(d, "dddd, MMMM D, YYYY"); // "Wednesday, Ashwin 7, 2083"
+ * formatBsDate(d, { nepali: true }); // "२०८३-०६-०७"
+ * formatBsDate(d, "dddd, MMMM D, YYYY", { nepali: true }); // "बुधवार, असोज ७, २०८३"
  *
  * @throws {InvalidBSDateError} If `date` is not a real, supported BS date.
  */
-export function formatBsDate(date: BSDate, layout = "YYYY-MM-DD"): string {
+export function formatBsDate(date: BSDate, options?: FormatBsDateOptions): string;
+export function formatBsDate(date: BSDate, layout?: string, options?: FormatBsDateOptions): string;
+export function formatBsDate(
+  date: BSDate,
+  layoutOrOptions?: string | FormatBsDateOptions,
+  options?: FormatBsDateOptions,
+): string {
+  const layout = typeof layoutOrOptions === "string" ? layoutOrOptions : "YYYY-MM-DD";
+  const opts =
+    typeof layoutOrOptions === "object" && layoutOrOptions !== null ? layoutOrOptions : options;
+  const nepali = opts?.nepali === true;
   assertValidBsDate(date);
   const { year, month, day } = date;
-  let weekday: string | undefined;
+  const digits = nepali ? toNepaliDigits : String;
+  let weekday: number | undefined;
+  const dayOfWeek = (): number => (weekday ??= getBsDayOfWeek(date));
   const value = (token: Token): string => {
     switch (token) {
       case "YYYY":
-        return String(year);
+        return digits(String(year));
       case "YY":
-        return pad2(year % 100);
+        return digits(pad2(year % 100));
       case "MMMM":
-        return getBsMonthName(month);
+        return nepali ? getBsMonthNameNepali(month) : getBsMonthName(month);
       case "MM":
-        return pad2(month);
+        return digits(pad2(month));
       case "M":
-        return String(month);
+        return digits(String(month));
       case "DD":
-        return pad2(day);
+        return digits(pad2(day));
       case "D":
-        return String(day);
+        return digits(String(day));
       case "dddd":
-        return (weekday ??= WEEKDAY_NAMES[getBsDayOfWeek(date)]);
+        return nepali ? getBsWeekdayNameNepali(dayOfWeek()) : getBsWeekdayName(dayOfWeek());
       case "ddd":
-        return (weekday ??= WEEKDAY_NAMES[getBsDayOfWeek(date)]).slice(0, 3);
+        return nepali
+          ? WEEKDAY_SHORT_NAMES_NEPALI[dayOfWeek()]
+          : getBsWeekdayName(dayOfWeek()).slice(0, 3);
     }
   };
 

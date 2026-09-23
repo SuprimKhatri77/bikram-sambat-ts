@@ -3,6 +3,9 @@
   // column count, and wrapping them buys nothing for a project this size.
   "config": {
     "MD013": false,
+    // Prettier aligns tables by display width; this rule counts characters,
+    // so tables containing Devanagari combining marks can never satisfy both.
+    "MD060": false,
   },
   "globs": ["**/*.md"],
   "ignores": ["node_modules", "dist", "LICENSE"],
